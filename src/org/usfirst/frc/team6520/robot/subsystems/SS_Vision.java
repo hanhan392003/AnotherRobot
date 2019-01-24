@@ -131,15 +131,17 @@ public class SS_Vision extends Subsystem implements PIDSource {
 				MatOfPoint2f dst = new MatOfPoint2f();  
 				src.convertTo(dst, CvType.CV_32F);
 				boundRect.add(Imgproc.minAreaRect(dst));
-					if (boundRect.get(i).size.area() > 150) {
-						Imgproc.putText(mat, Math.round(boundRect.get(i).angle)+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y-30), 0 , 0.5 , new Scalar(255,255,255));					
+					if (boundRect.get(i).size.area() > 650) {
+						Imgproc.putText(mat, Math.round(boundRect.get(i).angle)+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y-30), 0 , 0.5 , new Scalar(255,255,255));
+						Imgproc.putText(mat, Math.round(boundRect.get(i).size.area())+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y+50), 0 , 0.5 , new Scalar(255,255,255));
+						Imgproc.putText(mat, Math.round(boundRect.get(i).center.x)+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y+80), 0 , 0.5 , new Scalar(255,255,255));
 					}
 				}
 			for (int i = 0; i < boundRect.size() - 1; i++) {
 				// tạo một bounding box hình chữ nhật bao quanh contour
 				// nếu kích cỡ của contour lớn hơn 1 giá trị
 				// dùng để loại các vật thể nhiễu có thể lẫn vào
-				if (boundRect.get(i).size.area() > 150) {
+				if (boundRect.get(i).size.area() > 500) {
 					
 
 //					MatOfPoint src = new MatOfPoint(contours.get(i));
@@ -151,7 +153,7 @@ public class SS_Vision extends Subsystem implements PIDSource {
 //						MatOfPoint2f dst1 = new MatOfPoint2f();  
 //						src1.convertTo(dst1, CvType.CV_32F);
 //						RotatedRect boundRect2 = Imgproc.minAreaRect(dst1);
-						if (boundRect.get(i).angle>boundRect.get(i+1).angle && boundRect.get(i).center.x<boundRect.get(i+1).center.x) {
+						if (boundRect.get(i).angle>boundRect.get(i+1).angle && Math.round(boundRect.get(i).angle)!=-90 && Math.round(boundRect.get(i+1).angle)!=-90) {
 							centerX = Math.round((boundRect.get(i).center.x+boundRect.get(i+1).center.x)/2);
 							centerY = Math.round((boundRect.get(i).center.y+boundRect.get(i+1).center.y)/2);
 							Imgproc.putText(mat,"here", new Point(centerX,centerY), 0 , 0.5 , new Scalar(255,255,255));					
