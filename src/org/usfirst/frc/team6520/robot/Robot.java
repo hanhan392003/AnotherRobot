@@ -110,7 +110,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		RobotMap.ss_vision.followX();
+		RobotMap.ss_vision.TurnToCenter();
 		Scheduler.getInstance().run();
 	}
 

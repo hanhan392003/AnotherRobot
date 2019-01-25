@@ -26,8 +26,8 @@ public class RobotMap {
 	public static SS_Drivebase ss_drivebase = new SS_Drivebase();
 	public static SS_Vision ss_vision = new SS_Vision();
 	
-	public static VictorSP leftmotor = new VictorSP(2);
-	public static VictorSP rightmotor = new VictorSP(1);
+	public static VictorSP m_left = new VictorSP(2);
+	public static VictorSP m_right = new VictorSP(1);
 	public static Encoder encoder = new Encoder(4,5,false,EncodingType.k4X);
 	
 	public static void update(){

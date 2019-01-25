@@ -32,8 +32,8 @@ public class SS_Drivebase extends Subsystem implements PIDOutput {
 		pid.setSetpoint(angle);
 		pid.enable();
 		while (pid.onTarget() == false){
-			RobotMap.leftmotor.set(pid.get());
-			RobotMap.rightmotor.set(pid.get());
+			RobotMap.m_left.set(pid.get());
+			RobotMap.m_right.set(pid.get());
 	}
 }
 	

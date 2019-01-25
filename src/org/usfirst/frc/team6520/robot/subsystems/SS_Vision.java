@@ -131,7 +131,7 @@ public class SS_Vision extends Subsystem implements PIDSource {
 				MatOfPoint2f dst = new MatOfPoint2f();  
 				src.convertTo(dst, CvType.CV_32F);
 				boundRect.add(Imgproc.minAreaRect(dst));
-					if (boundRect.get(i).size.area() > 650) {
+					if (boundRect.get(i).size.area() > 300) {
 						Imgproc.putText(mat, Math.round(boundRect.get(i).angle)+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y-30), 0 , 0.5 , new Scalar(255,255,255));
 						Imgproc.putText(mat, Math.round(boundRect.get(i).size.area())+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y+50), 0 , 0.5 , new Scalar(255,255,255));
 						Imgproc.putText(mat, Math.round(boundRect.get(i).center.x)+"", new Point(boundRect.get(i).center.x,boundRect.get(i).center.y+80), 0 , 0.5 , new Scalar(255,255,255));
@@ -141,7 +141,7 @@ public class SS_Vision extends Subsystem implements PIDSource {
 				// tạo một bounding box hình chữ nhật bao quanh contour
 				// nếu kích cỡ của contour lớn hơn 1 giá trị
 				// dùng để loại các vật thể nhiễu có thể lẫn vào
-				if (boundRect.get(i).size.area() > 500) {
+				if (boundRect.get(i).size.area() > 300) {
 					
 
 //					MatOfPoint src = new MatOfPoint(contours.get(i));
@@ -191,20 +191,20 @@ public class SS_Vision extends Subsystem implements PIDSource {
 	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-//	public void TurnToCenter() {
-//		while (centerX<158){
-//			RobotMap.ss_drivebase.m_left.set(-0.2);
-//			RobotMap.ss_drivebase.m_right.set(-0.2);
-//		}
-//		RobotMap.ss_drivebase.m_left.set(0);
-//		RobotMap.ss_drivebase.m_right.set(0);
-//		while (centerX>162) {
-//			RobotMap.ss_drivebase.m_left.set(0.2);
-//			RobotMap.ss_drivebase.m_right.set(0.2);
-//		}
-//		RobotMap.ss_drivebase.m_left.set(0);
-//		RobotMap.ss_drivebase.m_right.set(0);
-//	}
+	public void TurnToCenter() {
+		if (centerX<140){
+			RobotMap.m_left.set(-0.25);
+			RobotMap.m_right.set(-0.25);
+		}
+		else if (centerX>180) {
+			RobotMap.m_left.set(0.25);
+			RobotMap.m_right.set(0.25);
+		}
+		else {
+			RobotMap.m_left.set(0);
+			RobotMap.m_right.set(0);
+		}
+	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
